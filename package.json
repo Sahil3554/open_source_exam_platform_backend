@@ -1,0 +1,23 @@
+{
+  "name": "open_source_exam_platform_backend",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/app.js",
+  "scripts": {
+  
+    "test": "tsc-watch --onSuccess \"node dist/app.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Harsh-Tagra/open_source_exam_platform_backend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Harsh-Tagra/open_source_exam_platform_backend/issues"
+  },
+  "homepage": "https://github.com/Harsh-Tagra/open_source_exam_platform_backend#readme",
+  "dependencies": {
+    "tsc-watch": "^6.2.1"
+  }
+}
