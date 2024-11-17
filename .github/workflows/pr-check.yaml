@@ -1,0 +1,43 @@
+name: PR Validation
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-validation:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the repository
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js (if applicable to your project)
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.18.0
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: npm i
+
+      # Step 4: Check for lint issues
+      - name: Run Linter
+        run: npx eslint '**/*.js' --max-warnings=0
+
+      # # Step 5: Run tests
+      # - name: Run Tests
+      #   run: npm test
+
+      # Step 6: Scan for sensitive information
+      - name: Check for Sensitive Information
+        uses: github/super-linter@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Step 7: Fail the workflow on any warnings/errors
+      - name: Verify All Steps Passed
+        if: ${{ failure() }}
+        run: echo "Workflow failed due to errors." && exit 1
